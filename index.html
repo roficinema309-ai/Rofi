@@ -1,1655 +1,1066 @@
-ROFI STUDIO — MASTER PROJECT SPECIFICATION
-
-1. هوية المشروع
-
-اسم المنصة الرسمي:
-
-ROFI Studio
-
-منصة احترافية لإنشاء محتوى فيديو بالذكاء الاصطناعي، موجهة لصناعة:
-
-1. ROFI Ads — صناعة الإعلانات التجارية الاحترافية.
-2. ROFI Cinema — صناعة القصص والأفلام والمسلسلات والفيديوهات السينمائية والدرامية.
-
-المنصة يجب أن تبدو كمنتج SaaS عالمي احترافي، وليس كواجهة AI بسيطة.
-
-الهوية البصرية:
-
-- Premium
-- Cinematic
-- Modern
-- Institutional
-- Elegant
-- Dark luxury interface
-- واجهة عربية وإنجليزية
-- دعم RTL بشكل كامل
-- تجربة استخدام سهلة رغم قوة الأدوات
-- عدم إغراق المستخدم بعشرات الخيارات غير الضرورية
-- التركيز على جودة النتيجة النهائية
-
----
-
-2. القاعدة الأساسية للمشروع
-
-لا تقم بإعادة بناء المشروع من الصفر إذا كان هناك كود أو مكونات أو صفحات موجودة بالفعل.
-
-يجب:
-
-- الحفاظ على كل ما تم بناؤه.
-- الحفاظ على الحسابات.
-- الحفاظ على المشاريع.
-- الحفاظ على Credits.
-- الحفاظ على إعدادات Owner.
-- الحفاظ على الـDashboard.
-- الحفاظ على ROFI Director.
-- الحفاظ على ROFI Image Engine.
-- الحفاظ على ROFI Islamic Content Guard.
-- الحفاظ على أي نظام موجود حاليًا.
-- إضافة الميزات الجديدة بطريقة Modular.
-- عدم حذف ميزة موجودة إلا إذا كان هناك سبب تقني واضح وموافقة صريحة.
-
-أي تعديل يجب أن يكون Incremental وليس destructive.
-
----
-
-3. بنية المنصة الرئيسية
-
-بعد تسجيل الدخول يظهر للمستخدم:
-
-ROFI Studio Dashboard
-
-يتكون النظام الأساسي من:
-
-A — ROFI Ads
-
-قسم صناعة الإعلانات.
-
-B — ROFI Cinema
-
-قسم صناعة الفيديوهات السينمائية والقصص والمسلسلات.
-
-C — ROFI Image Engine
-
-مولد الصور والمراجع البصرية.
-
-D — ROFI Director
-
-العقل الإبداعي الذي يساعد المستخدم على تحويل الفكرة إلى مشروع فيديو كامل.
-
-E — Projects
-
-جميع المشاريع السابقة.
-
-F — Assets
-
-الصور والفيديوهات والصوتيات والملفات المستخدمة.
-
-G — Credits
-
-رصيد المستخدم واستهلاكه.
-
-H — Settings
-
-الإعدادات والحساب واللغة وغيرها.
-
-I — Owner/Admin
-
-قسم خاص بالمالك فقط.
-
----
-
-4. أهم قاعدة مالية
-
-المالك يجب أن يستطيع استخدام المنصة داخليًا بشكل مجاني.
-
-Owner:
-
-- لا يحتاج Subscription.
-- لا يحتاج شراء Credits.
-- يمتلك صلاحيات واسعة.
-- يستطيع تجربة جميع أجزاء النظام.
-- يستطيع إنشاء عدد كبير من المشاريع حسب حدود البنية التقنية.
-- يستطيع اختبار جميع المحركات.
-
-لكن هذا لا يعني أن API الخارجية مجانية.
-
-يجب فصل:
-
-OWNER ACCESS
-
-عن
-
-API COST
-
-بحيث تكون تجربة المالك مجانية من ناحية نظام الاشتراك الداخلي، بينما تكاليف خدمات الذكاء الاصطناعي يتم التحكم بها من الـBackend.
-
-لا يتم تفعيل أي API مدفوع أو خدمة خارجية أو اشتراك مدفوع تلقائيًا.
-
-أي Integration مدفوع يجب أن يكون:
-
-- Configurable
-- Disabled by default إذا لم تتم إضافة المفاتيح
-- موضحًا داخل إعدادات Owner
-- قابلًا للتشغيل أو الإيقاف
-
----
-
-5. ROFI ADS
-
-الهدف
-
-إنشاء إعلانات تجارية احترافية من البداية حتى الفيديو النهائي.
-
-المستخدم يستطيع اختيار:
-
-نوع الإعلان
-
-- Product Advertisement
-- Brand Advertisement
-- Social Media Ad
-- UGC-style Ad
-- Cinematic Commercial
-- Luxury Commercial
-- Fashion Commercial
-- Food Commercial
-- Technology Commercial
-- Automotive Commercial
-- Real Estate Commercial
-- App Promotion
-- Service Advertisement
-- Short Promotional Video
-- Story-based Advertisement
-
----
-
-6. طرق إنشاء الإعلان
-
-يجب توفير ثلاثة أوضاع:
-
-AUTO MODE
-
-المستخدم يدخل:
-
-- المنتج
-- اسم العلامة
-- وصف بسيط
-- الجمهور المستهدف
-- المنصة
-
-والنظام يتولى:
-
-Concept
-→ Creative Direction
-→ Script
-→ Scenes
-→ Shot List
-→ Camera Directions
-→ Visual Style
-→ Voice
-→ Music Direction
-→ Final Video
-
----
-
-DIRECTOR MODE
-
-وضع احترافي للمستخدم الذي يريد التحكم الإبداعي.
-
-ROFI Director يقوم بإنشاء:
-
-- Creative Concept
-- Story
-- Script
-- Scene Breakdown
-- Shot List
-- Camera Movement
-- Lens Suggestions
-- Lighting
-- Environment
-- Character Direction
-- Product Placement
-- Transition
-- Sound Design
-- Voice-over
-- Music Direction
-
-ثم يستطيع المستخدم تعديل كل مرحلة قبل الانتقال للمرحلة التالية.
-
----
-
-PROMPT MODE
-
-المستخدم يكتب Prompt مباشر.
-
-النظام يحوله إلى Prompt احترافي Production-ready.
-
-يجب تحسين الـPrompt تلقائيًا مع الحفاظ على نية المستخدم.
-
----
-
-7. ROFI CINEMA
-
-هذا قسم مستقل وليس مجرد نسخة من قسم الإعلانات.
-
-الهدف:
-
-إنشاء:
-
-- أفلام قصيرة
-- قصص قصيرة
-- مسلسلات
-- حلقات
-- مشاهد درامية
-- أفلام سينمائية قصيرة
-- أفلام رعب
-- أفلام غموض
-- أكشن
-- دراما
-- Fantasy
-- Sci-Fi
-- Thriller
-- Historical Fiction
-- Adventure
-- Social Drama
-- Inspirational Stories
-
----
-
-8. ROFI CINEMA — Creative Workflow
-
-يجب أن يكون النظام قادرًا على تحويل:
-
-IDEA
-
-إلى:
-
-CONCEPT
-↓
-CHARACTERS
-↓
-WORLD BUILDING
-↓
-STORY
-↓
-EPISODE STRUCTURE
-↓
-SCREENPLAY
-↓
-SCENES
-↓
-SHOT LIST
-↓
-STORYBOARD
-↓
-IMAGE REFERENCES
-↓
-VIDEO GENERATION
-↓
-VOICE
-↓
-SOUND DESIGN
-↓
-MUSIC
-↓
-EDIT
-↓
-FINAL CINEMATIC VIDEO
-
----
-
-9. STORY GENERATOR
-
-يستطيع المستخدم كتابة فكرة بسيطة مثل:
-
-"شاب يعود إلى مدينته بعد سنوات ويكتشف سرًا غامضًا."
-
-ROFI Director يجب أن يستطيع تحويلها إلى مشروع كامل.
-
-يقوم بإنشاء:
-
-- Title
-- Logline
-- Genre
-- Theme
-- Characters
-- Character Profiles
-- Locations
-- Time Period
-- Story Arc
-- Beginning
-- Conflict
-- Climax
-- Resolution
-- Scene List
-- Dialogue
-- Cinematic Direction
-
----
-
-10. SERIES MODE
-
-يجب دعم إنشاء مسلسل.
-
-المستخدم يحدد:
-
-- اسم المسلسل
-- النوع
-- عدد الحلقات
-- مدة الحلقة
-- الشخصيات
-- الأسلوب البصري
-
-ثم يقوم النظام بإنشاء:
-
-Season
-→ Episodes
-→ Episode Story
-→ Scenes
-→ Shots
-
-مع الحفاظ على:
-
-Character Consistency
-
-الشخصية يجب أن تحافظ على:
-
-- الشكل
-- الملابس
-- العمر التقريبي
-- الشعر
-- الألوان
-- السمات البصرية
-
-عبر المشاهد والحلقات.
-
----
-
-11. CINEMATIC SCENE BUILDER
-
-كل مشهد يجب أن يحتوي على:
-
-Scene Number
-
-Location
-
-Time
-
-Characters
-
-Action
-
-Dialogue
-
-Emotion
-
-Camera Shot
-
-Camera Movement
-
-Lens / Framing
-
-Lighting
-
-Environment
-
-Atmosphere
-
-Sound
-
-Music
-
-Transition
-
-Negative Prompt / Constraints
-
----
-
-12. VIDEO GENERATION
-
-يجب بناء Video Engine بطريقة Modular.
-
-لا تربط المنصة بمحرك واحد بشكل Hard-coded.
-
-استخدم:
-
-MODEL ROUTER
-
-بحيث يمكن مستقبلاً إضافة:
-
-Video Provider A
-Video Provider B
-Video Provider C
-
-بدون إعادة بناء المنصة.
-
-الـBackend هو المسؤول عن اختيار المحرك.
-
-الواجهة لا تحتوي على API Keys.
-
----
-
-13. مدة الفيديو
-
-يجب دعم الفيديوهات القصيرة والطويلة حسب قدرة المحرك المستخدم.
-
-الواجهة تدعم خيارات مثل:
-
-5 sec
-10 sec
-15 sec
-30 sec
-60 sec
-
-وعند إنتاج مشروع سينمائي طويل يتم تقسيمه تلقائيًا إلى Shots/Clips ثم تجميعها.
-
----
-
-14. VIDEO FORMATS
-
-دعم:
-
-9:16
-
-16:9
-
-1:1
-
-4:5
-
-وغيرها حسب الحاجة.
-
-Preset:
-
-TikTok
-Instagram Reels
-YouTube Shorts
-YouTube
-Facebook
-Instagram Feed
-Cinema
-Custom
-
----
-
-15. CINEMATIC CONTROLS
-
-يجب توفير تحكم احترافي في:
-
-Camera
-
-- Wide Shot
-- Medium Shot
-- Close Up
-- Extreme Close Up
-- Over Shoulder
-- POV
-- Tracking
-- Dolly
-- Crane
-- Pan
-- Tilt
-- Push In
-- Pull Out
-- Orbit
-
-Lighting
-
-- Soft
-- Hard
-- Dramatic
-- Golden Hour
-- Night
-- Neon
-- Studio
-- High Contrast
-- Low Key
-
-Visual Style
-
-- Cinematic
-- Photorealistic
-- Film
-- TV Drama
-- Documentary
-- Luxury
-- Dark
-- Warm
-- Cold
-- Epic
-
----
-
-16. CHARACTER SYSTEM
-
-يجب إنشاء Character Reference System.
-
-عند إنشاء شخصية:
-
-Character ID
-
-ويتم حفظ:
-
-- Reference Image
-- Description
-- Clothing
-- Physical appearance
-- Hair
-- Accessories
-- Personality
-- Voice profile
-- Style
-
-ثم تستخدم الشخصية في جميع المشاهد.
-
-الهدف الأساسي:
-
-CONSISTENCY.
-
----
-
-17. PRODUCT REFERENCE SYSTEM
-
-في ROFI Ads يستطيع المستخدم رفع:
-
-- Product Image
-- Logo
-- Brand Image
-- Reference Image
-
-ويجب الحفاظ على شكل المنتج وعدم تغييره بشكل غير مقصود.
-
----
-
-18. IMAGE ENGINE
-
-ROFI Image Engine يجب أن يستطيع إنشاء:
-
-- Product shots
-- Characters
-- Locations
-- Storyboards
-- Posters
-- Thumbnails
-- Cinematic Frames
-- Concept Art
-
-مع دعم Reference Images.
-
----
-
-19. STORYBOARD
-
-قبل إنشاء الفيديو النهائي، يجب توفير Storyboard.
-
-كل Shot يظهر كـCard:
-
-Shot 01
-Shot 02
-Shot 03
-...
-
-مع:
-
-Image
-Duration
-Camera
-Action
-Dialogue
-Sound
-
-ويمكن للمستخدم:
-
-- Edit
-- Regenerate
-- Delete
-- Reorder
-
----
-
-20. VIDEO TIMELINE
-
-يجب إنشاء Timeline احترافي قدر الإمكان.
-
-المستخدم يستطيع:
-
-- ترتيب المشاهد
-- قص المقاطع
-- تغيير المدة
-- إضافة Voice
-- إضافة Music
-- إضافة SFX
-- إضافة Text
-- إضافة Transitions
-
----
-
-21. VOICE SYSTEM
-
-دعم:
-
-- Male
-- Female
-- Narrator
-- Character voices
-
-مع إمكانية اختيار اللغة واللهجة حسب الخدمات المتاحة.
-
-لا يتم تشغيل خدمة صوت مدفوعة دون API Key/configuration من Owner.
-
----
-
-22. SOUND DESIGN
-
-دعم:
-
-- Background Music
-- Ambient Sound
-- Sound Effects
-- Cinematic Hits
-- Whoosh
-- Footsteps
-- Environment
-
-مع إمكانية التحكم في مستويات الصوت.
-
----
-
-23. EXPORT
-
-يجب أن يستطيع المستخدم:
-
-Preview
-
-ثم:
-
-Export
-
-حسب الإمكانيات المتاحة.
-
-يجب إظهار:
-
-Rendering
-Processing
-Completed
-Failed
-
-مع معالجة الأخطاء بشكل واضح.
-
----
-
-24. ROFI ISLAMIC CONTENT GUARD
-
-يجب الحفاظ على:
-
-ROFI Islamic Content Guard
-
-وظيفته فحص المحتوى قبل التوليد.
-
-يجب منع أو تحذير المستخدم من المحتوى غير المناسب وفق قواعد المنصة، خصوصًا:
-
-- المحتوى الإباحي
-- العري
-- المحتوى الجنسي الصريح
-- المحتوى الفاضح
-- المحتوى المخالف للآداب
-- المحتوى غير الملائم للأطفال
-- أي محتوى محظور وفق سياسة المنصة
-
-يجب أن يعمل النظام قبل إرسال الطلب إلى محرك التوليد قدر الإمكان.
-
-ويجب أن يكون القرار واضحًا للمستخدم.
-
----
-
-25. OWNER DASHBOARD
-
-يجب أن يحتوي Owner Dashboard على:
-
-Users
-
-Subscriptions
-
-Credits
-
-Projects
-
-Generations
-
-API Providers
-
-API Usage
-
-Errors
-
-System Health
-
-Moderation
-
-Content Guard
-
-Settings
-
-Feature Flags
-
----
-
-26. API MANAGEMENT
-
-يجب عدم وضع API Keys في Frontend.
-
-يجب استخدام:
-
-Backend / Server-side functions
-
-وEnvironment Variables.
-
-أمثلة:
-
-VIDEO_API_KEY
-
-IMAGE_API_KEY
-
-VOICE_API_KEY
-
-DATABASE_URL
-
-AUTH_SECRET
-
----
-
-27. SECURITY
-
-يجب:
-
-- حماية API Keys.
-- عدم إرسال Secrets إلى Frontend.
-- التحقق من صلاحيات المستخدم Server-side.
-- التحقق من Owner Role Server-side.
-- حماية Routes.
-- Rate Limiting.
-- Input Validation.
-- File Validation.
-- حماية Uploads.
-- حماية API Endpoints.
-
----
-
-28. CREDITS SYSTEM
-
-يجب وجود Credits.
-
-كل Generation يمكن أن يستهلك Credits حسب:
-
-Video duration
-Resolution
-Model
-Voice
-Image
-Other services
-
-يجب تسجيل:
-
-Generation ID
-User ID
-Provider
-Model
-Duration
-Cost
-Credits Used
-Status
-Created At
-
----
-
-29. OWNER CREDIT EXEMPTION
-
-إذا كان المستخدم:
-
-OWNER
-
-فلا يتم خصم Credits منه بالطريقة المعتادة.
-
-لكن يجب تسجيل الاستخدام الداخلي لأغراض:
-
-Analytics
-Cost Tracking
-Monitoring
-
----
-
-30. SUBSCRIPTION ARCHITECTURE
-
-المستخدم العادي:
-
-Free / Paid Plans
-
-لكن لا يتم ربط المنصة بمزود دفع محدد بطريقة يصعب تغييرها.
-
-استخدم Payment Abstraction Layer.
-
-حتى يمكن إضافة مزود دفع مستقبلًا.
-
----
-
-31. UI / UX
-
-الواجهة يجب أن تكون:
-
-Premium.
-
-التصميم:
-
-Dark luxury
-
-مع لمسات ذهبية راقية بدون مبالغة.
-
-Sidebar
-
-Dashboard
-
-Cards
-
-Project Workspace
-
-Professional Editor
-
-Responsive Design.
-
----
-
-32. MOBILE
-
-يجب أن تعمل المنصة جيدًا على:
-
-Android
-
-Tablet
-
-Chromebook
-
-Desktop
-
-لا تفترض أن المستخدم لديه PC قوي.
-
----
-
-33. ARABIC / ENGLISH
-
-دعم كامل:
-
-Arabic RTL
-
-English LTR
-
-يجب ألا تكون الترجمة مجرد ترجمة نصوص.
-
-يجب أن يتغير Layout direction بشكل صحيح.
-
----
-
-34. PROJECT MANAGEMENT
-
-كل مشروع يحتوي على:
-
-Project ID
-
-Owner
-
-Type
-
-Ads / Cinema
-
-Title
-
-Status
-
-Created At
-
-Updated At
-
-Assets
-
-Scenes
-
-Generations
-
-Exports
-
----
-
-35. AUTOSAVE
-
-كل تعديل مهم يجب حفظه تلقائيًا.
-
-يجب منع فقدان المشروع عند:
-
-Refresh
-Browser Close
-Network Error
-
-قدر الإمكان.
-
----
-
-36. ERROR HANDLING
-
-لا تعرض للمستخدم:
-
-Raw API Errors
-Stack traces
-Internal secrets
-
-بدلًا من ذلك:
-
-"تعذر إنشاء الفيديو حاليًا. حاول مرة أخرى."
-
-مع تسجيل التفاصيل في Server Logs.
-
----
-
-37. MODEL ROUTER
-
-يجب أن تكون البنية:
-
-ROFI UI
-↓
-ROFI Backend
-↓
-Model Router
-↓
-Selected Provider
-↓
-Generation
-↓
-Storage
-↓
-Project
-
-بدل:
-
-Frontend
-↓
-Provider API
-
----
-
-38. PROVIDER ABSTRACTION
-
-يجب أن يكون لكل مزود Adapter مستقل.
-
-مثال:
-
-/providers/video/providerA
-/providers/video/providerB
-/providers/image/providerA
-/providers/voice/providerA
-
-وبذلك يمكن تبديل المحرك دون تغيير الـUI.
-
----
-
-39. DATABASE
-
-استخدم Database Architecture مناسبة للمشروع.
-
-يجب تصميم الجداول/collections بشكل واضح لـ:
-
-users
-
-profiles
-
-projects
-
-scenes
-
-shots
-
-characters
-
-assets
-
-generations
-
-credits
-
-subscriptions
-
-providers
-
-usage_logs
-
-settings
-
-moderation_logs
-
----
-
-40. FILE STORAGE
-
-الملفات الكبيرة يجب ألا يتم تخزينها داخل GitHub.
-
-GitHub يستخدم للكود.
-
-Storage يستخدم للـ:
-
-Images
-Videos
-Audio
-Project Assets
-
----
-
-41. GITHUB
-
-يجب أن يكون المشروع:
-
-Clean Repository
-
-مع:
-
-README.md
-
-.env.example
-
-.gitignore
-
-Documentation
-
-Clear folder structure
-
-No secrets
-
-No API keys
-
-No unnecessary generated files
-
----
-
-42. VERCEL
-
-يجب أن يكون المشروع متوافقًا مع Vercel.
-
-يجب عدم الاعتماد على:
-
-Local filesystem persistence
-
-أو أي شيء غير مناسب للـserverless architecture.
-
-استخدم الخدمات الخارجية المناسبة للتخزين وقاعدة البيانات عند الحاجة.
-
-Environment Variables يتم ضبطها من Vercel Project Settings.
-
----
-
-43. DEVELOPMENT WORKFLOW
-
-قبل إضافة أي Feature:
-
-1. Inspect existing code.
-2. Identify reusable components.
-3. Do not duplicate systems.
-4. Implement feature.
-5. Run lint.
-6. Run type check.
-7. Run build.
-8. Fix all errors.
-9. Test affected pages.
-10. Commit changes.
-
----
-
-44. IMPORTANT — DO NOT BREAK EXISTING FEATURES
-
-قبل أي تعديل:
-
-راجع:
-
-- Authentication
-- Owner system
-- Credits
-- Projects
-- Dashboard
-- ROFI Director
-- ROFI Image Engine
-- Islamic Content Guard
-- Existing UI
-- Existing database
-- Existing integrations
-
-ثم أضف التعديل.
-
----
-
-45. NO PLACEHOLDER PRODUCT
-
-لا أريد:
-
-Fake buttons
-Fake generation
-Fake API calls
-Fake success messages
-
-إذا كانت خدمة غير موصلة بعد:
-
-يجب أن تكون الحالة واضحة:
-
-"Provider not configured"
-
-وليس:
-
-"Video generated"
-
----
-
-46. FREE OWNER EXPERIENCE
-
-يجب أن يكون Owner قادرًا على الدخول وتجربة:
-
-ROFI Ads
-
-ROFI Cinema
-
-ROFI Director
-
-ROFI Image Engine
-
-Storyboard
-
-Characters
-
-Projects
-
-Editor
-
-كل ذلك من خلال Owner Mode بدون اشتراك داخلي.
-
----
-
-47. OWNER CONTROL CENTER
-
-إضافة:
-
-Provider Enable/Disable
-
-Model Selection
-
-Default Model
-
-Credit Cost
-
-Maximum Duration
-
-Allowed Resolutions
-
-Content Guard
-
-Maintenance Mode
-
-Feature Flags
-
----
-
-48. FEATURE FLAGS
-
-استخدم Feature Flags حتى يمكن تشغيل وإيقاف:
-
-Ads
-
-Cinema
-
-Image Engine
-
-Video Engine
-
-Voice
-
-Music
-
-Cinema Series
-
-Character Consistency
-
-Islamic Guard
-
----
-
-49. PERFORMANCE
-
-يجب:
-
-- Lazy load للمكونات الثقيلة.
-- ضغط الصور.
-- Pagination.
-- عدم تحميل جميع المشاريع مرة واحدة.
-- Cache عند الحاجة.
-- Background jobs للعمليات الطويلة.
-- Polling/WebSocket مناسب لحالة Rendering.
-
----
-
-50. RESPONSIVE DASHBOARD
-
-Desktop:
-
-Sidebar + Workspace
-
-Tablet:
-
-Collapsible Sidebar
-
-Mobile:
-
-Bottom Navigation أو Sidebar Drawer
-
----
-
-51. MAIN USER EXPERIENCE
-
-عند دخول المستخدم:
-
-Welcome to ROFI Studio
-
-ثم:
-
-"What do you want to create?"
-
-خيارات كبيرة:
-
-🎬 Create Cinema
-📢 Create Ad
-🧠 ROFI Director
-🖼 Create Image
-
----
-
-52. ADS WORKFLOW UI
-
-Create Ad
-
-↓
-
-Choose Mode
-
-Auto
-Director
-Prompt
-
-↓
-
-Upload Product
-
-↓
-
-Choose Platform
-
-↓
-
-Choose Format
-
-↓
-
-Choose Duration
-
-↓
-
-Generate Concept
-
-↓
-
-Approve
-
-↓
-
-Generate Script
-
-↓
-
-Approve
-
-↓
-
-Generate Storyboard
-
-↓
-
-Approve
-
-↓
-
-Generate Video
-
-↓
-
-Edit
-
-↓
-
-Export
-
----
-
-53. CINEMA WORKFLOW UI
-
-Create Cinema
-
-↓
-
-Choose:
-
-Short Film
-Series
-Episode
-Scene
-
-↓
-
-Idea
-
-↓
-
-ROFI Director
-
-↓
-
-Characters
-
-↓
-
-World
-
-↓
-
-Story
-
-↓
-
-Script
-
-↓
-
-Scenes
-
-↓
-
-Storyboard
-
-↓
-
-Generate Shots
-
-↓
-
-Assemble
-
-↓
-
-Voice + Music + SFX
-
-↓
-
-Edit
-
-↓
-
-Final Cinematic Video
-
----
-
-54. CONTINUITY ENGINE
-
-ROFI Cinema يجب أن يحافظ على continuity:
-
-Character
-
-Location
-
-Props
-
-Lighting
-
-Time
-
-Costume
-
-Camera style
-
-Color treatment
-
-Story state
-
----
-
-55. REGENERATION
-
-إذا لم تعجب المستخدم نتيجة Shot:
-
-Regenerate Shot
-
-وليس:
-
-Regenerate Entire Project.
-
----
-
-56. VERSIONING
-
-يجب حفظ:
-
-Version 1
-Version 2
-Version 3
-
-حتى يستطيع المستخدم الرجوع إلى نسخة سابقة.
-
----
-
-57. PROJECT DUPLICATION
-
-زر:
-
-Duplicate Project
-
-لإنشاء نسخة مستقلة من المشروع.
-
----
-
-58. BRAND KIT
-
-ROFI Ads يجب أن يدعم:
-
-Logo
-
-Brand Colors
-
-Fonts
-
-Product Images
-
-Brand Voice
-
-Style
-
-ثم تستخدم تلقائيًا في المشاريع.
-
----
-
-59. SOCIAL MEDIA PRESETS
-
-إضافة Presets جاهزة:
-
-TikTok
-
-Instagram Reels
-
-YouTube Shorts
-
-Facebook
-
-Instagram
-
-YouTube
-
----
-
-60. QUALITY PRIORITY
-
-الأولوية:
-
-1. جودة الفيديو.
-2. ثبات الشخصيات والمنتجات.
-3. جودة السيناريو.
-4. جودة الـStoryboard.
-5. جودة الإخراج السينمائي.
-6. سرعة مناسبة.
-7. تجربة المستخدم.
-
-لا تضحي بالجودة لمجرد تقليل عدد الخيارات.
-
----
-
-61. FINAL ARCHITECTURE
-
-ROFI STUDIO
-
-├── Dashboard
-│
-├── ROFI ADS
-│   ├── Auto
-│   ├── Director
-│   ├── Prompt
-│   ├── Product
-│   ├── Script
-│   ├── Storyboard
-│   ├── Video
-│   └── Editor
-│
-├── ROFI CINEMA
-│   ├── Short Film
-│   ├── Series
-│   ├── Episodes
-│   ├── Characters
-│   ├── World Building
-│   ├── Script
-│   ├── Scenes
-│   ├── Storyboard
-│   ├── Shots
-│   ├── Video
-│   └── Editor
-│
-├── ROFI DIRECTOR
-│
-├── ROFI IMAGE ENGINE
-│
-├── PROJECTS
-│
-├── ASSETS
-│
-├── CREDITS
-│
-├── SUBSCRIPTION
-│
-├── SETTINGS
-│
-└── OWNER CONTROL CENTER
-
----
-
-62. MOST IMPORTANT DEVELOPMENT RULE
-
-Do not implement everything in one giant change.
-
-Build incrementally.
-
-First:
-
-Audit existing project.
-
-Second:
-
-Fix architecture.
-
-Third:
-
-Complete ROFI Ads.
-
-Fourth:
-
-Build ROFI Cinema.
-
-Fifth:
-
-Connect Video Engine.
-
-Sixth:
-
-Connect Image Engine.
-
-Seventh:
-
-Connect Voice/Music.
-
-Eighth:
-
-Complete Editor.
-
-Ninth:
-
-Security.
-
-Tenth:
-
-Testing.
-
-Eleventh:
-
-Production deployment.
-
----
-
-63. CURRENT TASK
-
-The current task is NOT to redesign the entire project blindly.
-
-First inspect the existing GitHub codebase.
-
-Determine:
-
-- Framework
-- Folder structure
-- Existing pages
-- Existing components
-- Authentication
-- Database
-- Storage
-- APIs
-- Existing Owner system
-- Existing Credits system
-- Existing ROFI Director
-- Existing Image Engine
-- Existing Islamic Content Guard
-
-Then produce a concise implementation plan.
-
-After the audit, implement the next missing feature without breaking existing functionality.
-
----
-
-64. FINAL PRINCIPLE
-
-ROFI Studio يجب أن يشعر للمستخدم وكأنه:
-
-"AI Creative Studio"
-
-وليس:
-
-"AI Generator Website".
-
-المنصة يجب أن تكون قابلة للتوسع مستقبلًا إلى:
-
-Advertising Studio
-Cinema Studio
-AI Film Production
-AI Series Production
-AI Creative Agency Platform
-
-مع الحفاظ على بنية تقنية Modular وقابلة لإضافة نماذج ومزودين جدد بدون إعادة بناء المشروع بالكامل.
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROFI STUDIO — AI Creative Studio</title>
+  <style>
+    :root {
+      --bg: #070709;
+      --surface: #0e0f13;
+      --surface-2: #15171e;
+      --surface-3: #1c1f29;
+      --ink: #f6f7f9;
+      --muted: #98a0b0;
+      --line: rgba(255, 255, 255, 0.08);
+      --gold: #d4af37;
+      --gold-soft: rgba(212, 175, 55, 0.14);
+      --gold-border: rgba(212, 175, 55, 0.34);
+      --danger: #ef4444;
+      --danger-soft: rgba(239, 68, 68, 0.14);
+      --ok: #22c55e;
+      --ok-soft: rgba(34, 197, 94, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 88% 8%, rgba(212, 175, 55, 0.09), transparent 40%),
+        radial-gradient(circle at 12% 92%, rgba(212, 175, 55, 0.05), transparent 45%),
+        var(--bg);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* الهيكل العام */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: 64px;
+      background: rgba(7, 7, 9, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 18px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      width: 38px;
+      height: 38px;
+      font-size: 1.1rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      font-size: 1.05rem;
+    }
+
+    .brand-gem {
+      width: 11px;
+      height: 11px;
+      transform: rotate(45deg);
+      background: var(--gold);
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.65);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+      color: var(--muted);
+    }
+
+    .pill.gold {
+      background: var(--gold-soft);
+      border-color: var(--gold-border);
+      color: #f3d678;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+      color: var(--ink);
+      transition: 0.18s ease;
+    }
+
+    .btn:hover {
+      background: var(--surface-3);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #09090b;
+      border-color: var(--gold);
+    }
+
+    .btn-gold:hover {
+      background: #e5c14d;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: calc(100vh - 64px);
+    }
+
+    aside.sidebar {
+      background: var(--surface);
+      border-inline-end: 1px solid var(--line);
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      padding: 10px 12px 6px;
+    }
+
+    .nav-item {
+      width: 100%;
+      text-align: start;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      transition: 0.16s ease;
+    }
+
+    .nav-item:hover {
+      background: var(--surface-2);
+      color: var(--ink);
+    }
+
+    .nav-item.active {
+      background: var(--gold-soft);
+      border-color: var(--gold-border);
+      color: #f5db87;
+      font-weight: 700;
+    }
+
+    main.workspace {
+      padding: 24px;
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    /* شاشة الترحيب والاختيارات الرئيسية */
+    .welcome-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 22px;
+    }
+
+    .welcome-card h1 {
+      font-size: clamp(1.6rem, 3.5vw, 2.35rem);
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .welcome-card .prompt-q {
+      font-size: 1.05rem;
+      color: #f3d678;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .launch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .launch-btn {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: 0.18s ease;
+    }
+
+    .launch-btn:hover {
+      border-color: var(--gold-border);
+      background: var(--surface-3);
+      transform: translateY(-2px);
+    }
+
+    .launch-btn .icon {
+      font-size: 1.4rem;
+    }
+
+    .launch-btn strong {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .launch-btn span {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    /* بطاقات وحالات النظام */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .stat-val {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #f3d678;
+      margin-top: 6px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .field label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      width: 100%;
+    }
+
+    .field textarea {
+      min-height: 82px;
+      resize: vertical;
+    }
+
+    .status-banner {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+
+    .status-banner.warn {
+      background: var(--gold-soft);
+      border-color: var(--gold-border);
+      color: #f5db87;
+    }
+
+    .status-banner.block {
+      background: var(--danger-soft);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+
+    .status-banner.ok {
+      background: var(--ok-soft);
+      border-color: rgba(34, 197, 94, 0.35);
+      color: #86efac;
+    }
+
+    .provider-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.88rem;
+    }
+
+    .provider-row:last-child {
+      border-bottom: none;
+    }
+
+    .tag-unconfigured {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      background: var(--surface-3);
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .tag-active {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      background: var(--ok-soft);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      color: #86efac;
+    }
+
+    .log-list {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .log-item {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.84rem;
+    }
+
+    .switch-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.88rem;
+    }
+
+    .switch-row:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+        position: relative;
+      }
+
+      aside.sidebar {
+        display: none;
+        position: fixed;
+        top: 64px;
+        bottom: 0;
+        inset-inline-start: 0;
+        width: 250px;
+        z-index: 35;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+      }
+
+      aside.sidebar.open {
+        display: flex;
+      }
+
+      main.workspace {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-group">
+      <button class="menu-toggle" id="menuBtn" aria-label="Menu">☰</button>
+      <div class="brand">
+        <span class="brand-gem"></span>
+        <span>ROFI STUDIO</span>
+      </div>
+      <span class="pill gold" id="ownerBadge">OWNER MODE • FREE INTERNAL</span>
+    </div>
+
+    <div class="top-actions">
+      <span class="pill" id="autosavePill">Autosave: Ready</span>
+      <button class="btn" id="langToggleBtn">EN / العربية</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="nav-label" data-i18n="navCore">Core Workspace</div>
+      <button class="nav-item active" data-view="dashboard" data-i18n="vDashboard">Dashboard</button>
+      <button class="nav-item" data-view="ads" data-i18n="vAds">ROFI Ads</button>
+      <button class="nav-item" data-view="cinema" data-i18n="vCinema">ROFI Cinema</button>
+      <button class="nav-item" data-view="director" data-i18n="vDirector">ROFI Director</button>
+      <button class="nav-item" data-view="images" data-i18n="vImages">ROFI Image Engine</button>
+
+      <div class="nav-label" data-i18n="navManage">Projects & Account</div>
+      <button class="nav-item" data-view="projects" data-i18n="vProjects">Projects</button>
+      <button class="nav-item" data-view="assets" data-i18n="vAssets">Assets</button>
+      <button class="nav-item" data-view="credits" data-i18n="vCredits">Credits & Subscription</button>
+      <button class="nav-item" data-view="settings" data-i18n="vSettings">Settings</button>
+
+      <div class="nav-label" data-i18n="navOwner">Owner Control</div>
+      <button class="nav-item" data-view="owner" data-i18n="vOwner">Owner Control Center</button>
+    </aside>
+
+    <main class="workspace">
+      <!-- DASHBOARD VIEW -->
+      <section class="view active" id="view-dashboard">
+        <div class="welcome-card">
+          <h1>Welcome to ROFI Studio</h1>
+          <div class="prompt-q">What do you want to create?</div>
+
+          <div class="launch-grid">
+            <button class="launch-btn" data-jump="cinema">
+              <span class="icon">🎬</span>
+              <strong>Create Cinema</strong>
+              <span data-i18n="dCinemaSub">Short films, series, episodes & scenes</span>
+            </button>
+            <button class="launch-btn" data-jump="ads">
+              <span class="icon">📢</span>
+              <strong>Create Ad</strong>
+              <span data-i18n="dAdsSub">Commercials, UGC, product & brand ads</span>
+            </button>
+            <button class="launch-btn" data-jump="director">
+              <span class="icon">🧠</span>
+              <strong>ROFI Director</strong>
+              <span data-i18n="dDirectorSub">Concept, story, script, shots & direction</span>
+            </button>
+            <button class="launch-btn" data-jump="images">
+              <span class="icon">🖼</span>
+              <strong>Create Image</strong>
+              <span data-i18n="dImagesSub">Product shots, characters, storyboards & frames</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="muted" data-i18n="mRole">Account Role</div>
+            <div class="stat-val" id="dashRoleVal">OWNER (Exempt)</div>
+            <div class="muted" data-i18n="mRoleNote">No subscription or credit deduction required internally</div>
+          </div>
+          <div class="card">
+            <div class="muted" data-i18n="mDrafts">Saved Drafts</div>
+            <div class="stat-val" id="dashDraftCount">0</div>
+            <div class="muted" data-i18n="mDraftsNote">Stored locally with automatic autosave</div>
+          </div>
+          <div class="card">
+            <div class="muted" data-i18n="mEngines">External AI Engines</div>
+            <div class="stat-val" style="color: var(--muted);">Not Configured</div>
+            <div class="muted" data-i18n="mEnginesNote">Server-side API keys required before live generation</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3 data-i18n="guardTitle">ROFI Islamic Content Guard (Pre-Check)</h3>
+            <p class="muted" data-i18n="guardDesc">Screens prompts and project ideas before processing to block prohibited or inappropriate content.</p>
+            <div class="field" style="margin-top: 12px;">
+              <label data-i18n="guardInputLbl">Test Idea / Prompt Check</label>
+              <textarea id="guardTestInput" placeholder="Write a concept or prompt to screen..."></textarea>
+            </div>
+            <button class="btn btn-gold" id="runGuardBtn" data-i18n="guardRunBtn">Screen Content</button>
+            <div class="status-banner" id="guardResultBox">Ready for screening.</div>
+          </div>
+
+          <div class="card">
+            <h3 data-i18n="routerTitle">Model Router & Provider Status</h3>
+            <p class="muted" data-i18n="routerDesc">Unconfigured external providers report "Provider not configured" — no fake outputs.</p>
+            <div class="provider-row">
+              <span>Video Engine (Router)</span>
+              <span class="tag-unconfigured">Provider not configured</span>
+            </div>
+            <div class="provider-row">
+              <span>Image Engine (Router)</span>
+              <span class="tag-unconfigured">Provider not configured</span>
+            </div>
+            <div class="provider-row">
+              <span>Voice & Audio Engine</span>
+              <span class="tag-unconfigured">Provider not configured</span>
+            </div>
+            <div class="provider-row">
+              <span>Islamic Content Guard</span>
+              <span class="tag-active" id="guardStatusTag">Enabled</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROFI ADS VIEW -->
+      <section class="view" id="view-ads">
+        <div class="card">
+          <h2>ROFI Ads</h2>
+          <p class="muted" data-i18n="adsSub">Configure ad type, creation mode, format, duration, and brief (autosaved).</p>
+          <div class="grid-2" style="margin-top: 14px;">
+            <div class="field">
+              <label>Creation Mode</label>
+              <select id="adMode" data-save="adMode">
+                <option value="Auto Mode">Auto Mode</option>
+                <option value="Director Mode">Director Mode</option>
+                <option value="Prompt Mode">Prompt Mode</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Ad Type</label>
+              <select id="adType" data-save="adType">
+                <option>Product Advertisement</option>
+                <option>Brand Advertisement</option>
+                <option>Social Media Ad</option>
+                <option>UGC-style Ad</option>
+                <option>Cinematic Commercial</option>
+                <option>Luxury Commercial</option>
+                <option>Fashion Commercial</option>
+                <option>Food Commercial</option>
+                <option>Technology Commercial</option>
+                <option>Automotive Commercial</option>
+                <option>Real Estate Commercial</option>
+                <option>App Promotion</option>
+                <option>Service Advertisement</option>
+                <option>Short Promotional Video</option>
+                <option>Story-based Advertisement</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Platform & Format</label>
+              <select id="adPreset" data-save="adPreset">
+                <option>TikTok (9:16)</option>
+                <option>Instagram Reels (9:16)</option>
+                <option>YouTube Shorts (9:16)</option>
+                <option>YouTube (16:9)</option>
+                <option>Instagram Feed (1:1 / 4:5)</option>
+                <option>Facebook (16:9 / 4:5)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Target Duration</label>
+              <select id="adDuration" data-save="adDuration">
+                <option>5 sec</option>
+                <option>10 sec</option>
+                <option selected>15 sec</option>
+                <option>30 sec</option>
+                <option>60 sec</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Brand, Product & Creative Brief</label>
+            <textarea id="adBrief" data-save="adBrief" placeholder="Enter product, brand name, target audience, and message..."></textarea>
+          </div>
+
+          <button class="btn btn-gold" data-trigger-provider="Video Engine">Generate Ad Video</button>
+          <div class="status-banner warn">Provider not configured — Connect backend Video API to generate renders.</div>
+        </div>
+      </section>
+
+      <!-- ROFI CINEMA VIEW -->
+      <section class="view" id="view-cinema">
+        <div class="card">
+          <h2>ROFI Cinema</h2>
+          <p class="muted" data-i18n="cinemaSub">Independent narrative workspace for short films, series, episodes, and scenes.</p>
+          <div class="grid-3" style="margin-top: 14px;">
+            <div class="field">
+              <label>Format</label>
+              <select id="cinemaFormat" data-save="cinemaFormat">
+                <option>Short Film</option>
+                <option>Series</option>
+                <option>Episode</option>
+                <option>Scene</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Genre</label>
+              <select id="cinemaGenre" data-save="cinemaGenre">
+                <option>Drama</option>
+                <option>Thriller</option>
+                <option>Mystery</option>
+                <option>Action</option>
+                <option>Fantasy</option>
+                <option>Sci-Fi</option>
+                <option>Historical Fiction</option>
+                <option>Adventure</option>
+                <option>Social Drama</option>
+                <option>Inspirational Stories</option>
+                <option>Horror</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Aspect Ratio</label>
+              <select id="cinemaRatio" data-save="cinemaRatio">
+                <option>16:9 (Cinema)</option>
+                <option>9:16 (Vertical)</option>
+                <option>1:1</option>
+                <option>4:5</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Story Idea / Continuity Notes</label>
+            <textarea id="cinemaIdea" data-save="cinemaIdea" placeholder="Example: A young man returns to his hometown after years and uncovers a mysterious secret..."></textarea>
+          </div>
+
+          <button class="btn btn-gold" data-trigger-provider="Video Engine">Generate Cinematic Shots</button>
+          <div class="status-banner warn">Provider not configured — Connect backend Video API & Model Router to render scenes.</div>
+        </div>
+      </section>
+
+      <!-- DIRECTOR VIEW -->
+      <section class="view" id="view-director">
+        <div class="card">
+          <h2>ROFI Director</h2>
+          <p class="muted">Creative direction workspace for concepts, story arcs, scene breakdowns, camera & lighting notes.</p>
+          <div class="field" style="margin-top: 14px;">
+            <label>Creative Direction Brief</label>
+            <textarea id="directorBrief" data-save="directorBrief" placeholder="Describe your creative direction, visual style, camera movement, and tone..."></textarea>
+          </div>
+          <button class="btn btn-gold" data-trigger-provider="Director LLM">Run Director Pass</button>
+          <div class="status-banner warn">Provider not configured — Backend AI generation endpoint is not connected yet.</div>
+        </div>
+      </section>
+
+      <!-- IMAGE ENGINE VIEW -->
+      <section class="view" id="view-images">
+        <div class="card">
+          <h2>ROFI Image Engine</h2>
+          <p class="muted">Visual references, character sheets, product shots, storyboards, and frames.</p>
+          <div class="grid-2" style="margin-top: 14px;">
+            <div class="field">
+              <label>Visual Category</label>
+              <select id="imgCat" data-save="imgCat">
+                <option>Cinematic Frames</option>
+                <option>Character Reference</option>
+                <option>Product Shots</option>
+                <option>Storyboard Panels</option>
+                <option>Locations & Concept Art</option>
+                <option>Posters & Thumbnails</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Lighting & Style</label>
+              <select id="imgStyle" data-save="imgStyle">
+                <option>Cinematic • Low Key</option>
+                <option>Photorealistic • Golden Hour</option>
+                <option>Dark Luxury • High Contrast</option>
+                <option>Film • Soft Lighting</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Image Prompt</label>
+            <textarea id="imgPrompt" data-save="imgPrompt" placeholder="Describe subject, framing, lighting, and environment..."></textarea>
+          </div>
+          <button class="btn btn-gold" data-trigger-provider="Image Engine">Generate Visual</button>
+          <div class="status-banner warn">Provider not configured — Connect backend Image API to generate visuals.</div>
+        </div>
+      </section>
+
+      <!-- PROJECTS / ASSETS / CREDITS / SETTINGS / OWNER -->
+      <section class="view" id="view-projects">
+        <div class="card">
+          <h2>Projects</h2>
+          <p class="muted">Autosaved project state stored in browser storage until backend database & storage are linked.</p>
+          <div class="status-banner" id="projectSnapshotBox">No active brief saved yet.</div>
+        </div>
+      </section>
+
+      <section class="view" id="view-assets">
+        <div class="card">
+          <h2>Assets</h2>
+          <p class="muted">Large media files (images, video, audio) are stored in external object storage rather than GitHub.</p>
+          <div class="status-banner warn">Provider not configured — External media storage bucket is not connected yet.</div>
+        </div>
+      </section>
+
+      <section class="view" id="view-credits">
+        <div class="card">
+          <h2>Credits & Subscription</h2>
+          <p class="muted">Owner accounts are exempt from internal subscriptions and credit deductions, while logging internal usage.</p>
+          <div class="status-banner ok">Owner Exemption Active: Internal credits are not deducted for Owner mode.</div>
+          <div class="log-list" id="usageLogList"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-settings">
+        <div class="card">
+          <h2>Settings</h2>
+          <p class="muted">Language direction automatically switches between Arabic (RTL) and English (LTR).</p>
+          <div class="field" style="margin-top: 12px;">
+            <label>Interface Language & Direction</label>
+            <select id="langSelect">
+              <option value="ar">العربية (RTL)</option>
+              <option value="en">English (LTR)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-owner">
+        <div class="card">
+          <h2>Owner Control Center</h2>
+          <p class="muted">Feature flags and system controls. External API keys stay server-side in environment variables.</p>
+          <div style="margin-top: 12px;">
+            <div class="switch-row">
+              <span>ROFI Islamic Content Guard</span>
+              <input type="checkbox" id="flagGuard" checked />
+            </div>
+            <div class="switch-row">
+              <span>Owner Credit Exemption (Internal Logs Only)</span>
+              <input type="checkbox" id="flagOwnerExempt" checked />
+            </div>
+            <div class="switch-row">
+              <span>Autosave Drafts</span>
+              <input type="checkbox" id="flagAutosave" checked />
+            </div>
+          </div>
+          <div class="status-banner warn">All external paid AI providers remain disabled by default until configured on the backend.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "rofi_studio_state_v1";
+
+    const defaultState = {
+      lang: "ar",
+      view: "dashboard",
+      fields: {},
+      logs: [],
+      flags: {
+        guard: true,
+        ownerExempt: true,
+        autosave: true
+      }
+    };
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return structuredClone(defaultState);
+        const parsed = JSON.parse(raw);
+        return {
+          ...structuredClone(defaultState),
+          ...parsed,
+          fields: { ...(parsed.fields || {}) },
+          logs: Array.isArray(parsed.logs) ? parsed.logs : [],
+          flags: { ...defaultState.flags, ...(parsed.flags || {}) }
+        };
+      } catch {
+        return structuredClone(defaultState);
+      }
+    }
+
+    let state = loadState();
+
+    function saveState() {
+      if (!state.flags.autosave) {
+        document.getElementById("autosavePill").textContent = "Autosave: Off";
+        return;
+      }
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        document.getElementById("autosavePill").textContent = "Autosave: Saved";
+      } catch {
+        document.getElementById("autosavePill").textContent = "Autosave: Storage Full";
+      }
+    }
+
+    function addLog(message) {
+      const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      state.logs.unshift(`[${time}] ${message}`);
+      state.logs = state.logs.slice(0, 25);
+      saveState();
+      renderLogs();
+    }
+
+    function renderLogs() {
+      const box = document.getElementById("usageLogList");
+      if (!box) return;
+      if (!state.logs.length) {
+        box.innerHTML = `<div class="log-item muted">No internal activity logs recorded yet.</div>`;
+        return;
+      }
+      box.innerHTML = state.logs.map((entry) => `<div class="log-item">${escapeHtml(entry)}</div>`).join("");
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function screenIslamicGuard(text) {
+      const clean = (text || "").toLowerCase();
+      const blockedTerms = [
+        "porn", "xxx", "nsfw", "nude", "nudity", "explicit", "erotic",
+        "إباحي", "اباحي", "عري", "عارية", "جنسي", "فاضح"
+      ];
+      const hit = blockedTerms.some((term) => clean.includes(term));
+      return {
+        allowed: !hit,
+        reason: hit
+          ? "Blocked by ROFI Islamic Content Guard: Content violates platform decency/policy rules."
+          : "Approved by ROFI Islamic Content Guard pre-check."
+      };
+    }
+
+    function applyLanguage(lang) {
+      state.lang = lang === "en" ? "en" : "ar";
+      document.documentElement.lang = state.lang;
+      document.documentElement.dir = state.lang === "ar" ? "rtl" : "ltr";
+      const langSelect = document.getElementById("langSelect");
+      if (langSelect) langSelect.value = state.lang;
+      saveState();
+    }
+
+    function switchView(viewName) {
+      state.view = viewName;
+      document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
+      const target = document.getElementById(`view-${viewName}`);
+      if (target) target.classList.add("active");
+
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.classList.toggle("active", item.dataset.view === viewName);
+      });
+
+      document.getElementById("sidebar").classList.remove("open");
+      updateSnapshot();
+      saveState();
+    }
+
+    function updateSnapshot() {
+      const keys = Object.keys(state.fields).filter((k) => String(state.fields[k] || "").trim().length > 0);
+      document.getElementById("dashDraftCount").textContent = String(keys.length);
+      const snap = document.getElementById("projectSnapshotBox");
+      if (!snap) return;
+      if (!keys.length) {
+        snap.textContent = "No active brief saved yet.";
+      } else {
+        snap.textContent = `Saved fields (${keys.length}): ${keys.join(", ")}`;
+      }
+    }
+
+    // Restore saved fields
+    document.querySelectorAll("[data-save]").forEach((el) => {
+      const key = el.dataset.save;
+      if (Object.prototype.hasOwnProperty.call(state.fields, key)) {
+        el.value = state.fields[key];
+      }
+      el.addEventListener("input", () => {
+        state.fields[key] = el.value;
+        updateSnapshot();
+        saveState();
+      });
+      el.addEventListener("change", () => {
+        state.fields[key] = el.value;
+        updateSnapshot();
+        saveState();
+      });
+    });
+
+    // Navigation listeners
+    document.querySelectorAll(".nav-item").forEach((btn) => {
+      btn.addEventListener("click", () => switchView(btn.dataset.view));
+    });
+
+    document.querySelectorAll("[data-jump]").forEach((btn) => {
+      btn.addEventListener("click", () => switchView(btn.dataset.jump));
+    });
+
+    document.getElementById("menuBtn").addEventListener("click", () => {
+      document.getElementById("sidebar").classList.toggle("open");
+    });
+
+    document.getElementById("langToggleBtn").addEventListener("click", () => {
+      applyLanguage(state.lang === "ar" ? "en" : "ar");
+    });
+
+    document.getElementById("langSelect").addEventListener("change", (e) => {
+      applyLanguage(e.target.value);
+    });
+
+    // Guard screening button
+    document.getElementById("runGuardBtn").addEventListener("click", () => {
+      const input = document.getElementById("guardTestInput").value;
+      const box = document.getElementById("guardResultBox");
+      if (!state.flags.guard) {
+        box.className = "status-banner warn";
+        box.textContent = "ROFI Islamic Content Guard is currently disabled in Owner Control Center.";
+        return;
+      }
+      const res = screenIslamicGuard(input);
+      box.className = res.allowed ? "status-banner ok" : "status-banner block";
+      box.textContent = res.reason;
+      addLog(`Guard check -> ${res.allowed ? "PASS" : "BLOCK"}`);
+    });
+
+    // Provider triggers -> explicit "Provider not configured"
+    document.querySelectorAll("[data-trigger-provider]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const engineName = btn.dataset.triggerProvider;
+        const parentCard = btn.closest(".card");
+        const banner = parentCard ? parentCard.querySelector(".status-banner") : null;
+        if (banner) {
+          banner.className = "status-banner warn";
+          banner.textContent = `Provider not configured (${engineName}) — No external API key configured on backend.`;
+        }
+        addLog(`Attempted ${engineName}: Provider not configured`);
+      });
+    });
+
+    // Owner flags
+    const flagGuard = document.getElementById("flagGuard");
+    const flagOwnerExempt = document.getElementById("flagOwnerExempt");
+    const flagAutosave = document.getElementById("flagAutosave");
+
+    flagGuard.checked = state.flags.guard;
+    flagOwnerExempt.checked = state.flags.ownerExempt;
+    flagAutosave.checked = state.flags.autosave;
+
+    flagGuard.addEventListener("change", () => {
+      state.flags.guard = flagGuard.checked;
+      document.getElementById("guardStatusTag").textContent = state.flags.guard ? "Enabled" : "Disabled";
+      document.getElementById("guardStatusTag").className = state.flags.guard ? "tag-active" : "tag-unconfigured";
+      saveState();
+    });
+
+    flagOwnerExempt.addEventListener("change", () => {
+      state.flags.ownerExempt = flagOwnerExempt.checked;
+      document.getElementById("dashRoleVal").textContent = state.flags.ownerExempt ? "OWNER (Exempt)" : "OWNER (Tracked)";
+      saveState();
+    });
+
+    flagAutosave.addEventListener("change", () => {
+      state.flags.autosave = flagAutosave.checked;
+      saveState();
+    });
+
+    // Initial boot
+    applyLanguage(state.lang);
+    switchView(state.view);
+    renderLogs();
+    updateSnapshot();
+  </script>
+</body>
+</html>
