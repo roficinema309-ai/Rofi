@@ -1,158 +1,35 @@
+import {requireOwner,json} from './_auth.js';
 
-const MODULES = {
-  ads: {
-    title: "ROFI Ads",
-    description: "إدارة محرك صناعة الإعلانات التجارية."
-  },
-  cinema: {
-    title: "ROFI Cinema",
-    description: "إدارة صناعة الأفلام والمشاهد السينمائية."
-  },
-  video: {
-    title: "Video Engine",
-    description: "إدارة محرك توليد الفيديو."
-  },
-  voice: {
-    title: "Voice Engine",
-    description: "إدارة التعليق الصوتي والحوار."
-  },
-  guard: {
-    title: "Islamic Content Guard",
-    description: "إدارة طبقة الحماية من المحتوى المخالف."
-  },
-  router: {
-    title: "Model Router",
-    description: "إدارة توجيه طلبات التوليد إلى النماذج."
-  }
+const MODULES={
+  ads:{title:'ROFI Ads',description:'إدارة محرك الإعلانات والإنتاج التجاري.',checks:['ads_enabled','image_engine_enabled','video_engine_enabled']},
+  cinema:{title:'ROFI Cinema',description:'إدارة محرك القصص والأفلام والمشاهد.',checks:['cinema_enabled','video_engine_enabled']},
+  video:{title:'Video Engine',description:'إدارة مزود الفيديو ونموذج التوليد.',checks:['video_engine_enabled']},
+  voice:{title:'Voice Engine',description:'إدارة التعليق الصوتي والحوار والمزامنة.',checks:['voice_engine_enabled']},
+  guard:{title:'Islamic Content Guard',description:'طبقة الحماية الشرعية المطلوبة قبل وبعد التوليد.',checks:['islamic_guard_enabled']},
+  router:{title:'Model Router',description:'اختيار وتوجيه طلبات الإنتاج إلى مزودي النماذج.',checks:[]}
 };
 
-export default async function handler(req, res) {
-  res.setHeader("Cache-Control", "no-store");
+export default async function handler(req,res){
+  if(req.method!=='GET') return json(res,405,{success:false,message:'Method not allowed.'});
+  try{
+    const auth=await requireOwner(req,res);
+    if(!auth || !auth.user) return;
+    const key=String(req.query?.module||'');
+    const module=MODULES[key];
+    if(!module) return json(res,400,{success:false,message:'Unknown owner module.'});
 
-  if (req.method !== "GET" && req.method !== "POST") {
-    res.setHeader("Allow", "GET, POST");
-    return res.status(405).json({
-      success: false,
-      error: "Method not allowed"
-    });
-  }
-
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const anonKey = process.env.SUPABASE_ANON_KEY;
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!supabaseUrl || !anonKey || !serviceKey) {
-    return res.status(500).json({
-      success: false,
-      error: "Server configuration is incomplete"
-    });
-  }
-
-  const authorization = req.headers.authorization || "";
-  const token = authorization.startsWith("Bearer ")
-    ? authorization.slice(7)
-    : "";
-
-  if (!token) {
-    return res.status(401).json({
-      success: false,
-      error: "Authentication required"
-    });
-  }
-
-  try {
-    // Verify the user's access token with Supabase Auth.
-    const authResponse = await fetch(
-      `${supabaseUrl}/auth/v1/user`,
-      {
-        headers: {
-          apikey: anonKey,
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
-
-    if (!authResponse.ok) {
-      return res.status(401).json({
-        success: false,
-        error: "Invalid or expired session"
+    const settingsResponse=await (async()=>{
+      const base=process.env.SUPABASE_URL;
+      const service=process.env.SUPABASE_SERVICE_ROLE_KEY;
+      return fetch(`${base}/rest/v1/owner_settings?select=ads_enabled,cinema_enabled,image_engine_enabled,video_engine_enabled,voice_engine_enabled,islamic_guard_enabled,default_language,updated_at&limit=1`,{
+        headers:{apikey:service,Authorization:`Bearer ${service}`}
       });
-    }
-
-    const user = await authResponse.json();
-
-    if (!user.id) {
-      return res.status(401).json({
-        success: false,
-        error: "Unable to identify user"
-      });
-    }
-
-    // Read the role from the protected profiles table.
-    const profileResponse = await fetch(
-      `${supabaseUrl}/rest/v1/profiles?id=eq.${encodeURIComponent(user.id)}&select=role`,
-      {
-        headers: {
-          apikey: serviceKey,
-          Authorization: `Bearer ${serviceKey}`
-        }
-      }
-    );
-
-    if (!profileResponse.ok) {
-      return res.status(500).json({
-        success: false,
-        error: "Could not verify account permissions"
-      });
-    }
-
-    const profiles = await profileResponse.json();
-    const profile = profiles?.[0];
-
-    if (!profile || profile.role !== "owner") {
-      return res.status(403).json({
-        success: false,
-        error: "Owner access only"
-      });
-    }
-
-    const moduleId =
-      req.method === "GET"
-        ? req.query?.module
-        : req.body?.module;
-
-    if (moduleId) {
-      const moduleInfo = MODULES[moduleId];
-
-      if (!moduleInfo) {
-        return res.status(400).json({
-          success: false,
-          error: "Unknown module"
-        });
-      }
-
-      return res.status(200).json({
-        success: true,
-        ownerVerified: true,
-        module: moduleId,
-        details: moduleInfo,
-        integrationStatus: "not_connected"
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      ownerVerified: true,
-      message: "Owner access verified",
-      modules: MODULES
-    });
-
-  } catch (error) {
-    console.error("Owner module API error:", error);
-
-    return res.status(500).json({
-      success: false,
-      error: "Internal server error"
-    });
+    })();
+    if(!settingsResponse.ok) return json(res,500,{success:false,message:'Unable to read owner settings.'});
+    const rows=await settingsResponse.json();
+    const settings=rows[0]||null;
+    return json(res,200,{success:true,module:module,settings,verifiedUser:{id:auth.user.id,role:auth.profile.role}});
+  }catch(error){
+    return json(res,500,{success:false,message:error.message||'Owner module error.'});
   }
 }
