@@ -1,146 +1,27 @@
+import {requireOwner,json,supabaseFetch} from './_auth.js';
 
-const BLOCKED_PATTERNS = [
-  /\b(nude|nudity|naked|porn|pornography|explicit sexual)\b/i,
-  /\b(escort|sexual intercourse|sex scene|fetish)\b/i,
-  /\b(undress|undressing|striptease)\b/i,
-  /عاري|عارية|إباحي|إباحية|مشهد جنسي|تعري|خلع الملابس|محتوى جنسي صريح/i
-];
+export default async function handler(req,res){
+  if(req.method!=='POST') return json(res,405,{success:false,message:'Method not allowed.'});
+  try{
+    const auth=await requireOwner(req,res);
+    if(!auth || !auth.user) return;
+    const body=typeof req.body==='string' ? JSON.parse(req.body||'{}') : (req.body||{});
+    const text=String(body.prompt||body.script||body.description||'').trim();
+    const hasAsset=Boolean(body.hasAsset);
+    const base=process.env.SUPABASE_URL;
+    const service=process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const settingsResponse=await supabaseFetch('/rest/v1/owner_settings?select=islamic_guard_enabled&limit=1');
+    if(!settingsResponse.ok) return json(res,500,{success:false,message:'Unable to read guard settings.'});
+    const settingsRows=await settingsResponse.json();
+    const enabled=settingsRows[0]?.islamic_guard_enabled!==false;
 
-const MAX_TEXT_LENGTH = 12000;
+    // Server-side gate: this endpoint intentionally does not generate content.
+    // It establishes the mandatory policy checkpoint before any provider call is added.
+    if(!enabled) return json(res,403,{success:false,blocked:true,code:'GUARD_DISABLED',message:'Islamic Content Guard must remain enabled before generation.'});
+    if(!text && !hasAsset) return json(res,400,{success:false,blocked:true,code:'EMPTY_INPUT',message:'Provide a prompt, script, description, or asset before generation.'});
 
-function inspectText(value) {
-  if (typeof value !== "string") {
-    return { safe: true };
-  }
-
-  const text = value.slice(0, MAX_TEXT_LENGTH);
-
-  for (const pattern of BLOCKED_PATTERNS) {
-    if (pattern.test(text)) {
-      return { safe: false };
-    }
-  }
-
-  return { safe: true };
-}
-
-function inspectPayload(value, depth = 0) {
-  if (depth > 6) {
-    return { safe: false, reason: "Payload too deeply nested" };
-  }
-
-  if (typeof value === "string") {
-    return inspectText(value);
-  }
-
-  if (Array.isArray(value)) {
-    if (value.length > 100) {
-      return { safe: false, reason: "Payload is too large" };
-    }
-
-    for (const item of value) {
-      const result = inspectPayload(item, depth + 1);
-      if (!result.safe) return result;
-    }
-  }
-
-  if (value && typeof value === "object") {
-    const entries = Object.entries(value);
-
-    if (entries.length > 100) {
-      return { safe: false, reason: "Too many payload fields" };
-    }
-
-    for (const [key, item] of entries) {
-      const keyResult = inspectText(key);
-      if (!keyResult.safe) return keyResult;
-
-      const result = inspectPayload(item, depth + 1);
-      if (!result.safe) return result;
-    }
-  }
-
-  return { safe: true };
-}
-
-export default async function handler(req, res) {
-  res.setHeader("Cache-Control", "no-store");
-
-  if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
-    return res.status(405).json({
-      success: false,
-      error: "Method not allowed"
-    });
-  }
-
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const anonKey = process.env.SUPABASE_ANON_KEY;
-
-  if (!supabaseUrl || !anonKey) {
-    return res.status(500).json({
-      success: false,
-      error: "Server configuration is incomplete"
-    });
-  }
-
-  const authorization = req.headers.authorization || "";
-  const token = authorization.startsWith("Bearer ")
-    ? authorization.slice(7)
-    : "";
-
-  if (!token) {
-    return res.status(401).json({
-      success: false,
-      error: "Authentication required"
-    });
-  }
-
-  try {
-    const authResponse = await fetch(
-      `${supabaseUrl}/auth/v1/user`,
-      {
-        headers: {
-          apikey: anonKey,
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
-
-    if (!authResponse.ok) {
-      return res.status(401).json({
-        success: false,
-        error: "Invalid or expired session"
-      });
-    }
-
-    const payload = req.body || {};
-
-    const result = inspectPayload(payload);
-
-    if (!result.safe) {
-      return res.status(400).json({
-        success: false,
-        allowed: false,
-        code: "CONTENT_REJECTED",
-        message: "هذا الطلب لا يتوافق مع ضوابط المحتوى المعتمدة في ROFI."
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      allowed: true,
-      message: "Preflight check passed",
-      note: "This is a preliminary text check, not a complete content moderation system."
-    });
-
-  } catch (error) {
-    console.error("Guard preflight error:", error);
-
-    return res.status(500).json({
-      success: false,
-      allowed: false,
-      error: "Content check unavailable"
-    });
+    return json(res,200,{success:true,blocked:false,guard:{enabled:true,stage:'preflight',providerScan:'not_configured'},message:'Server-side preflight passed. Provider moderation has not yet been configured.'});
+  }catch(error){
+    return json(res,500,{success:false,message:error.message||'Guard preflight error.'});
   }
 }
