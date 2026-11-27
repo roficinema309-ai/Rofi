@@ -1,1 +1,366 @@
-<html><body><h1>Welcome to Rofi Studio</h1></body></html>.
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rofi Studio | روفي ستوديو</title>
+  <style>
+    :root {
+      --bg: #0c0e12;
+      --surface: #151921;
+      --surface-2: #1c222d;
+      --text: #f3f5f8;
+      --muted: #9aa3b2;
+      --accent: #e11d48;
+      --accent-hover: #be123c;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(12, 14, 18, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .brand {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 72px 0 56px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(225, 29, 72, 0.14);
+      color: #fda4af;
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 650px;
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-2);
+    }
+
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .section-header h2 {
+      font-size: 1.6rem;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      background: var(--surface);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: var(--surface-2);
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .about-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+    }
+
+    .about-box p {
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    footer {
+      padding: 28px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">Rofi <span>Studio</span></a>
+      <nav class="nav-links">
+        <a href="#works">الأعمال</a>
+        <a href="#about">عن الاستوديو</a>
+        <a href="#contact">تواصل</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="hero-badge">إنتاج ومحتوى رقمي</span>
+        <h1>مرحباً بك في Rofi Studio</h1>
+        <p>
+          مساحة إبداعية لعرض المشاريع والأعمال البصرية والرقمية بأسلوب حديث وسريع.
+          نطور المحتوى والأدوات خطوة بخطوة حتى تكتمل المنصة بالكامل.
+        </p>
+        <div class="actions">
+          <a href="#works" class="btn btn-primary">استعراض الأعمال</a>
+          <a href="#contact" class="btn btn-secondary">تواصل معنا</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="works">
+      <div class="container">
+        <div class="section-header">
+          <h2>الأعمال والمشاريع</h2>
+          <div class="filters">
+            <button class="filter-btn active" data-filter="all">الكل</button>
+            <button class="filter-btn" data-filter="visual">مرئيات</button>
+            <button class="filter-btn" data-filter="web">تطبيقات ويب</button>
+          </div>
+        </div>
+
+        <div class="grid" id="works-grid">
+          <article class="card" data-category="visual">
+            <div>
+              <span class="tag">مرئيات</span>
+              <h3>إنتاج بصري ومشاهد قصيرة</h3>
+              <p>تصميم مشاهد وقصص بصرية بجودة عالية ومناسبة للعرض السريع.</p>
+            </div>
+            <a href="#contact" class="btn btn-secondary">تفاصيل أكثر</a>
+          </article>
+
+          <article class="card" data-category="web">
+            <div>
+              <span class="tag">تطبيقات ويب</span>
+              <h3>منصة عرض ونشر رقمية</h3>
+              <p>واجهات ويب خفيفة وسريعة مرتبطة بالنشر المستمر على السحابة.</p>
+            </div>
+            <a href="#contact" class="btn btn-secondary">تفاصيل أكثر</a>
+          </article>
+
+          <article class="card" data-category="visual">
+            <div>
+              <span class="tag">مرئيات</span>
+              <h3>هوية وتصاميم مخصصة</h3>
+              <p>بناء عناصر بصرية متناسقة تعبر عن هوية المشروع بوضوح.</p>
+            </div>
+            <a href="#contact" class="btn btn-secondary">تفاصيل أكثر</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="about-box">
+          <h2>عن Rofi Studio</h2>
+          <p>
+            يهدف الاستوديو إلى تقديم محتوى ومنتجات رقمية عملية بواجهة بسيطة وواضحة،
+            مع تحديث مستمر وإضافة أقسام جديدة حسب احتياج المشروع.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="about-box">
+          <h2>تواصل معنا</h2>
+          <p>للاستفسارات أو التعاون أو إضافة مشاريع جديدة للمنصة.</p>
+          <div class="actions" style="margin-top: 18px;">
+            <a href="https://t.me/" target="_blank" rel="noopener" class="btn btn-primary">تليجرام</a>
+            <a href="#" class="btn btn-secondary">العودة للأعلى</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      جميع الحقوق محفوظة © Rofi Studio
+    </div>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll("#works-grid .card");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const filter = btn.dataset.filter;
+        cards.forEach((card) => {
+          const match = filter === "all" || card.dataset.category === filter;
+          card.style.display = match ? "flex" : "none";
+        });
+      });
+    });
+  </script>
+</body>
+</html>
